@@ -1,0 +1,26 @@
+.primary {
+    background-color: #fa9806;
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+}
+
+.primary:hover {
+    background-color: #d07e04;
+}
+
+.outline {
+    border: 1px solid #fa9806;
+    overflow: hidden;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background-color: #222222;
+    color: white;
+}
+
+.outline:hover {
+    background-color: #fa9806;
+    color: black;
+}
