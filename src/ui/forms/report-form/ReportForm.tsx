@@ -4,7 +4,7 @@ import { getUserSteamProfile } from "../../../apis/steam/searchUser"
 
 const ReportForm = () => {
  
-  const [steamId, setSteamId] = useState<string>('')
+  const [steamId, setSteamId] = useState<any>(null)
 
   const handleSearch = async (event: any) :Promise<void> => {
     event.preventDefault()

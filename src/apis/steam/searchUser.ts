@@ -10,7 +10,7 @@ export const getUserSteamProfile = async (steamId: any) => {
    try {
 
 
-       const response = await fetch(`http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${steamApiKey}&steamids=${steamId}`)
+       const response = await fetch(`https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${steamApiKey}&steamids=${steamId}`)
 
     
 
