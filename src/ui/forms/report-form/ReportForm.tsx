@@ -21,8 +21,11 @@ const ReportForm = () => {
         
         const { success, response: playerInfo  } = response
 
-        console.log(playerInfo.players)
-        setPlayer(playerInfo.players[0])
+        if (!success) {
+            alert('Error Fetching Player Info')
+        }
+
+        setPlayer(playerInfo)
 
     } catch (error) {
         console.log(error)
