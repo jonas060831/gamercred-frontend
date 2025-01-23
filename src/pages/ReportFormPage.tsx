@@ -1,8 +1,11 @@
+import ReportForm from "../ui/forms/report-form/ReportForm"
 
 
 const ReportFormPage = () => {
   return (
-    <div>ReportFormPage</div>
+    <div>
+        <ReportForm />
+    </div>
   )
 }
 
