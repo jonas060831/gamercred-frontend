@@ -11,9 +11,8 @@ export const getUserSteamProfile = async (steamId:any) => {
       
        const data = await response.json()
        const { response: player_info } = data
-       console.log(data)
 
-      return { success: true, response: player_info }
+      return { success: true, response: player_info.players[0] }
 
    } catch (error) {
       console.log(error)
