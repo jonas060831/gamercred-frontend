@@ -1,0 +1,15 @@
+/* Desktop only */
+@media (min-width: 821px) {
+    /* Styles for desktop devices */
+}
+
+/* Tablet only */
+@media (min-width: 481px) and (max-width: 820px) {
+    /* Styles for tablet devices */
+}
+
+/* Mobile only */
+@media (max-width: 480px) {
+    /* Styles for mobile devices */
+}
+  
