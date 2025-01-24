@@ -7,6 +7,7 @@ import LoginPage from "./pages/LoginPage";
 import './index.css'
 import ReportFormPage from "./pages/ReportFormPage";
 import Footer from "./ui/footer/Footer";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const  App = ()  => {
 
@@ -19,6 +20,7 @@ const  App = ()  => {
           <Route path='/register' element= {<RegisterPage />} />
           <Route path="/login" element={ <LoginPage/> }/>
           <Route path="/report-form" element={<ReportFormPage />} />
+          <Route path="/aboutus" element={<AboutUsPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

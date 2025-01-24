@@ -1,4 +1,5 @@
 
+import { NavLink } from 'react-router-dom'
 import styles from './Footer.module.css'
 
 const Footer = () => {
@@ -6,6 +7,7 @@ const Footer = () => {
     <div className={styles.footer_container}>
         
         <div>
+
             © Gamer Cred Inc. 2025
         </div>
 
