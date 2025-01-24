@@ -16,11 +16,11 @@ const AboutUsPage = () => {
         },
         {
             header : 'How it Started',
-            content: 'something content'
+            content: 'In early 2024, Founders Cora and Jennifer were discussing how toxic certain games seem to be more than others, especially being trans and a cis woman. Soon after that discussion, Cora had the idea for a platform that put accountability back into the hands of the gaming community. Jennifer was so excited about the mission and idea that she had 10 pages of notes brainstorming ideas. \n\n Demographic Insights \n\n • Women in Gaming: A 2023 study by Reach3 Insights and Lenovo found that 61% of female gamers hide their gender while playing online to avoid harassment. \n • LGBTQ+ Gamers: According to a 2022 study by the ADL, 38% of LGBTQ+ gamers reported severe harassment while gaming.'
         },
         {
-            header : 'something',
-            content: 'something content'
+            header : 'Become a Collaborator',
+            content: 'We are looking to partner with other companies who are aligned with our mission around mental health, marketing, etc.'
         },
     ]
 
@@ -34,18 +34,15 @@ const AboutUsPage = () => {
             {
                 points.map((point: any, index: number) => (
                     <div key={index}>
-                        <h4>{point.header}</h4>
+                        <h3>{point.header}</h3>
 
-                        <p>
+                        <p style={{ whiteSpace: 'pre-line' }}>
                             {point.content}
                         </p>
                     </div>
                 ))
             }
-           
         </div>
-        
-
     </div>
   )
 }
