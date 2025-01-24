@@ -20,52 +20,64 @@ const ReportForm = () => {
 
     const notAnumber = parseInt(vanityOrSteamId)
 
-    if(isNaN(notAnumber)) {
-        try {
-            const response = await getUserSteamId(vanityOrSteamId)
-    
-            const { success: successOnVanity, response: playerSteamId  } = response
-    
-    
-            if(!successOnVanity) {
-                alert('cannot find player')
-                throw new Error('Cannot Find Player')
-    
-            }
-    
-            const player = await getUserSteamProfile(playerSteamId)
-    
-            const { success, response: playerInfo  } = player
-    
-            if(!success) {
-                alert('No Details found')
-                throw new Error("No Details Found")
-                
-            }
-    
-            setPlayer(playerInfo)
-    
-        } catch (error) {
-            console.log(error)
-        }
+
+    if(vanityOrSteamId === '') {
+        alert('input cannot be empty')
+    } else {
+        //if the input is string
+        if(isNaN(notAnumber)) {
+            try {
+                const response = await getUserSteamId(vanityOrSteamId)
         
-
-    } else { //this will true if you provided the steam id granted it is all numbers
-
-        try {
-            const player = await getUserSteamProfile(vanityOrSteamId)
-
-            const { success, response: playerInfo  } = player
-
-            if(!success) {
-                alert('No Details found')
-                throw new Error("No Details Found")
+                const { success: successOnVanity, response: playerSteamId  } = response
+        
+                
+                if(!successOnVanity) {
+                    console.log('no matching result found')
+                    setPlayer({})
+                    
+                }
+        
+                const player = await getUserSteamProfile(playerSteamId)
+        
+                const { success, response: playerInfo  } = player
+        
+                if(!success) {
+                    alert('No Details found')
+                    throw new Error("No Details Found")
+                    
+                }
+        
+                setPlayer(playerInfo)
+                
+                if(playerInfo === undefined) {
+                    setPlayer({})
+                    console.log('no player found')
+                }
+        
+            } catch (error) {
+                console.log(error)
             }
+            
 
-            setPlayer(playerInfo)
+        } else { //this will true if you provided the steam id granted it is all numbers
 
-        } catch (error) {
-            console.log(error)
+            try {
+                const player = await getUserSteamProfile(vanityOrSteamId)
+
+                const { success, response: playerInfo  } = player
+
+                if(!success) {
+                    alert('No Details found')
+                    throw new Error("No Details Found")
+                }
+
+                setPlayer(playerInfo)
+
+            } catch (error) {
+                console.log(error)
+                console.log('no result found')
+            }
         }
     }
   }
@@ -73,13 +85,6 @@ const ReportForm = () => {
   return (
     <>
     <form onSubmit={handleSearch}>
-
-    {/* Enter Steam Id:
-    <input
-    type="text"
-    value={steamId}
-    onChange={e => setSteamId(e.target.value)}
-    /> */}
 
     Enter Player Vanity Name or Steam Id: <br />
     <input
@@ -91,10 +96,19 @@ const ReportForm = () => {
 
     <input type="submit" value="Search" />
     </form>
-
-    <img src={player.avatar} alt=""/>
-    {
-        player.personaname
+     
+    <h5>result:</h5>
+    {   
+        Object.keys(player).length !== 0 ? (
+            <>
+            <img src={player?.avatar} alt=""/>
+            {
+                player?.personaname
+            }
+            </>
+        ) : (
+            <>No Result Found</>
+        )
     }
     </>
     
