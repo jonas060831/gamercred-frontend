@@ -5,7 +5,7 @@
     display: flex;
     font-family: 'Inter', 'Tahoma';
     width: 100%;
-    padding: 1rem;
+    padding: 0rem 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -13,8 +13,33 @@
     flex-direction: column;
 }
 
-
 .aboutus_page_container .header h1 {
     font-weight: 900;
     font-size: 7.5rem;
+}
+
+.aboutus_page_container .content h3 {
+    font-weight: 900;
+}
+
+
+/* Desktop only */
+@media (min-width: 821px) {
+    /* Styles for desktop devices */
+}
+
+/* Tablet only */
+@media (min-width: 481px) and (max-width: 820px) {
+    /* Styles for tablet devices */
+}
+
+/* Mobile only */
+@media (max-width: 480px) {
+    .aboutus_page_container {
+        padding: 0rem 1rem;
+    }
+    /* Styles for mobile devices */
+    .aboutus_page_container .header h1 {
+        font-size: 4.5rem;
+    }
 }

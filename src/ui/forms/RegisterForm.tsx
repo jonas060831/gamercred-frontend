@@ -1,10 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { registerUser } from '../../services/authServices'
-import { useLocation } from 'react-router-dom'
-import BasicModal from '../modals/BasicModal'
+// import { useLocation } from 'react-router-dom'
+
 
 const RegisterForm = () => {
-  const location = useLocation()
+  //const location = useLocation()
   const [formData, setFormData] = useState({
         username: '',
         password: '' 
