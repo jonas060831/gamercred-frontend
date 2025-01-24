@@ -12,33 +12,15 @@ type Player = {
 
 const ReportForm = () => {
  
-  const [steamId, setSteamId] = useState<string>('')
-  const [vanityName, setVanityName] = useState<string>('')
   const [player, setPlayer] = useState<Player>({})
   const [vanityOrSteamId, setVanityOrSteamId] = useState<string>('')
 
   const handleSearch = async (event: any) :Promise<void> => {
     event.preventDefault()
 
-    if(parseInt(vanityOrSteamId)) {//this will true if you provided the steam id granted it is all numbers
-        
-        try {
-            const player = await getUserSteamProfile(vanityOrSteamId)
+    const notAnumber = parseInt(vanityOrSteamId)
 
-            const { success, response: playerInfo  } = player
-
-            if(!success) {
-                alert('No Details found')
-                throw new Error("No Details Found")
-            }
-
-            setPlayer(playerInfo)
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    } else {
+    if(isNaN(notAnumber)) {
         try {
             const response = await getUserSteamId(vanityOrSteamId)
     
@@ -66,8 +48,26 @@ const ReportForm = () => {
         } catch (error) {
             console.log(error)
         }
-    }
+        
 
+    } else { //this will true if you provided the steam id granted it is all numbers
+
+        try {
+            const player = await getUserSteamProfile(vanityOrSteamId)
+
+            const { success, response: playerInfo  } = player
+
+            if(!success) {
+                alert('No Details found')
+                throw new Error("No Details Found")
+            }
+
+            setPlayer(playerInfo)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
   }
 
   return (
