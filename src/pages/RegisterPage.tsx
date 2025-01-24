@@ -1,6 +1,12 @@
+import RegisterForm from "../ui/forms/RegisterForm"
+
 const RegisterPage = () => {
   return (
-    <div>RegisterPage</div>
+    <div>
+
+      <h3>Please Register:</h3>
+      <RegisterForm />
+    </div>
   )
 }
 

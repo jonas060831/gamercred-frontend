@@ -13,3 +13,16 @@
     gap: 1rem;
     align-items: center;
 }
+
+.footer_nav_links {
+    margin-bottom: 2rem;
+    background-color: red;
+}
+
+.footer_nav_links a{
+    text-decoration: none;
+    color: white;
+}
+.footer_nav_links a:hover {
+    opacity: 0.8;
+}
