@@ -21,6 +21,25 @@ export const getUserSteamProfile = async (steamId:any) => {
 }
 
 
+export const getUserSteamId = async (steamVanityName: any) => {
+
+   try {
+      const response = await fetch(`${BASE_URL}/api/steam_vanity/?vanityurl=${steamVanityName}`)
+
+      if(!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
+      
+      const data = await response.json()
+      const { response: playerInfo } = data
+
+
+      return { success: true, response: playerInfo.steamid}
+
+   } catch (error) {
+      console.log(error)
+      return { success: false, message: 'error occured during search', error }
+   }
+}
+
 
 
    
