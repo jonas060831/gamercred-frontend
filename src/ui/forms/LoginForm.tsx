@@ -1,6 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { loginUser } from '../../services/authServices'
 
+import styles from './LoginForm.module.css'
+
 const LoginForm = () => {
 
     const [formData, setFormData] = useState({
@@ -31,22 +33,26 @@ const LoginForm = () => {
     const handleChange = (event  :ChangeEvent<HTMLInputElement>) :void => setFormData({...formData, [event.target.name] : event.target.value})
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.login_form} onSubmit={handleSubmit}>
             
-                <label htmlFor="username">username:</label>
+                <label htmlFor="username">username:</label> <br />
                 <input
                 type="text"
                 name="username"
                 id="username"
                 onChange={handleChange}
                 />
-                <label htmlFor="password">password:</label>
+
+                <br />
+
+                <label htmlFor="password">password:</label> <br />
                 <input
                 type="password"
                 name="password"
                 id="password"
                 onChange={handleChange}
                 />
+                <br /><br />
 
                 <input type="submit" value="login" />
             </form>

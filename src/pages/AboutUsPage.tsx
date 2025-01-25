@@ -25,7 +25,7 @@ const AboutUsPage = () => {
     ]
 
   return (
-    <div className={styles.aboutus_page_container}>
+    <div className={`page_container ${styles.aboutus_page_container}`}>
         
         <div className={styles.header}>
             <h1>About Us</h1>

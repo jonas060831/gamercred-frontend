@@ -1,0 +1,15 @@
+
+.login_page_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.steam_button_img {
+    cursor: pointer;
+}
+.steam_button_img:hover {
+    opacity: 0.8;
+}

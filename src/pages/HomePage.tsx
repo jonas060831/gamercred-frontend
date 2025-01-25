@@ -3,7 +3,7 @@ import MastHead from "../ui/masthead/MastHead"
 
 const HomePage = () => {
   return (
-    <>
+    <div className="page_container">
         
     <MastHead
      header="Respect Levels You Up"
@@ -23,7 +23,7 @@ const HomePage = () => {
         </div>
     </MastHead>
 
-    </>
+    </div>
   )
 }
 

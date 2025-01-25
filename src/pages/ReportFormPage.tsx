@@ -3,7 +3,7 @@ import ReportForm from "../ui/forms/report-form/ReportForm"
 
 const ReportFormPage = () => {
   return (
-    <div>
+    <div className="page_container">
         <ReportForm />
     </div>
   )
