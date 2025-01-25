@@ -14,7 +14,7 @@ const Footer = () => {
                 Instagram
             </div>
             <div>
-                Email
+                <a href="mailto:.com">Send email</a>
             </div>
         </div>
     </div>
