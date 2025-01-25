@@ -8,6 +8,7 @@ import './index.css'
 import ReportFormPage from "./pages/ReportFormPage";
 import Footer from "./ui/footer/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 const  App = ()  => {
 
@@ -21,6 +22,7 @@ const  App = ()  => {
           <Route path="/login" element={ <LoginPage/> }/>
           <Route path="/report-form" element={<ReportFormPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
