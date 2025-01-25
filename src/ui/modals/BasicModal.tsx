@@ -4,10 +4,10 @@ type BasicModalProps = {
     title: string
     body: ReactNode
     modalId: string
-
+    footer?: ReactNode
 }
 
-const BasicModal:FC<BasicModalProps> = ({ title, body, modalId }) => {
+const BasicModal:FC<BasicModalProps> = ({ title, body, modalId, footer }) => {
     return (
         <div className="modal" tabIndex={-1} id={modalId}>
             <div className="modal-dialog">
@@ -19,6 +19,15 @@ const BasicModal:FC<BasicModalProps> = ({ title, body, modalId }) => {
                 <div className="modal-body">
                     {body}
                 </div>
+
+                {
+                    footer ? (
+                        footer
+                    ) : (
+                        <></>
+                    )
+                }
+                
                 </div>
             </div>
         </div>

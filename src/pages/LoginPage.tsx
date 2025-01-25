@@ -11,20 +11,6 @@ import ButtonLink from '../ui/button-link/ButtonLink'
 const LoginPage = () => {
   const [serverMessage, setServerMessage] = useState<string>('')
 
-  const handleLinkSteam = async() => {
-
-    //TODO missing or incorrect process 
-    window.location.href = `${import.meta.env.VITE_BACKEND_SERVER}/link-steam/`
-
-    // const response = await fetch(`${BASE_URL}/link-steam/`)
-
-    // const data = await response.json()
-
-    // window.location.href = data.redirect_url
-
-
-  }
-
   const handleError = (error: any) => {
     setServerMessage(error.message)
 
@@ -43,14 +29,6 @@ const LoginPage = () => {
         <h3>Login</h3>
         <LoginForm
          handleError={handleError}
-        />
-
-        {/* steam */}
-        <img
-         className={styles.steam_button_img}
-         src="/link_steam_button.png"
-         alt="link button"
-         onClick={handleLinkSteam}
         />
 
         or

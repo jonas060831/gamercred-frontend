@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { getUserSteamId, getUserSteamProfile } from "../../../apis/steam/searchUser"
 
-
 type Player = {
     realname?: string
     profileurl?: string
@@ -10,7 +9,9 @@ type Player = {
 
 }
 
-const ReportForm = () => {
+
+
+const ReportForm= () => {
  
   const [player, setPlayer] = useState<Player>({})
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
@@ -44,13 +45,14 @@ const ReportForm = () => {
                     throw new Error("No Details Found")
                     
                 }
-        
-                setPlayer(playerInfo)
-                
+    
+
                 if(playerInfo === undefined) {
                     setPlayer({})
                     console.log('no player found')
-                }
+                }   
+                //account created successfully
+                setPlayer(playerInfo)
         
             } catch (error) {
                 console.log(error)

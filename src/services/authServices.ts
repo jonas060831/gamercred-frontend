@@ -43,7 +43,7 @@ export const registerUser = async (formData: Record<any, string>) :Promise<any> 
 
         console.log(data)
 
-        return { success: true, message: 'Hello World' }
+        return { success: true, data }
     } catch (error) {
         console.log(error)
     }
