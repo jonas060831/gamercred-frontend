@@ -1,9 +1,14 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { loginUser } from '../../services/authServices'
 
 import styles from './LoginForm.module.css'
 
-const LoginForm = () => {
+
+type LoginFormProps = {
+    handleError: Function
+}
+
+const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
 
     const [formData, setFormData] = useState({
         username: '',
@@ -17,10 +22,7 @@ const LoginForm = () => {
         try {
             const response : any = await loginUser(formData)
 
-            if(!response.success) {
-                alert(response.message)
-                console.log(response)
-            }
+            if(!response.success) handleError(response)
 
             const { data } = response
             alert(data.message)
@@ -40,6 +42,7 @@ const LoginForm = () => {
                 type="text"
                 name="username"
                 id="username"
+                required
                 onChange={handleChange}
                 />
 
@@ -50,6 +53,7 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 id="password"
+                required
                 onChange={handleChange}
                 />
                 <br /><br />
