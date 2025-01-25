@@ -7,11 +7,21 @@ import { Modal } from 'bootstrap'
 import styles from './LoginPage.module.css'
 import ButtonLink from '../ui/button-link/ButtonLink'
 
-const LoginPage = () => {
 
+const BASE_URL = import.meta.env.VITE_BACKEND_SERVER
+const LoginPage = () => {
   const [serverMessage, setServerMessage] = useState<string>('')
 
   const handleLinkSteam = async() => {
+
+    //TODO missing or incorrect process 
+    window.location.href = `${BASE_URL}/link-steam/`
+
+    // const response = await fetch(`${BASE_URL}/link-steam/`)
+
+    // const data = await response.json()
+
+    // window.location.href = data.redirect_url
 
   }
 

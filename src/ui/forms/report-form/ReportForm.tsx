@@ -13,19 +13,16 @@ type Player = {
 const ReportForm = () => {
  
   const [player, setPlayer] = useState<Player>({})
-  const [vanityOrSteamId, setVanityOrSteamId] = useState<string>('')
+  const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
 
   const handleSearch = async (event: any) :Promise<void> => {
     event.preventDefault()
-
-    const notAnumber = parseInt(vanityOrSteamId)
-
 
     if(vanityOrSteamId === '') {
         alert('input cannot be empty')
     } else {
         //if the input is string
-        if(isNaN(notAnumber)) {
+        if(isNaN(vanityOrSteamId)) {
             try {
                 const response = await getUserSteamId(vanityOrSteamId)
         
