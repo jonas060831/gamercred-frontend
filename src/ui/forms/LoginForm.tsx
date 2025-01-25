@@ -20,7 +20,7 @@ const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
         event.preventDefault()
 
         try {
-            const response : any = await loginUser(formData)
+            const response = await loginUser(formData)
 
             if(!response.success) handleError(response)
 
@@ -28,7 +28,7 @@ const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
             alert(data.message)
             
         } catch (error) {
-
+            console.log(error)
         }
     }
 

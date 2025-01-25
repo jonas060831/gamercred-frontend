@@ -5,7 +5,7 @@ export const getUserSteamProfile = async (steamId:any) => {
    try {
 
        const response = await fetch(`${BASE_URL}/api/steam_user/?steamid=${steamId}`)
-
+      
 
        if(!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
       
