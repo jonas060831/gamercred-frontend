@@ -10,6 +10,8 @@ import Footer from "./ui/footer/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
 import ProfilePage from "./pages/ProfilePage";
 
+import './index.css'
+
 const  App = ()  => {
 
   return (

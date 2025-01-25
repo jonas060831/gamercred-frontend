@@ -5,11 +5,11 @@
     display: flex;
     font-family: 'Inter', 'Tahoma';
     width: 100%;
-    padding: 0rem 6rem;
+    padding-left: 6rem;
+    padding-right: 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 4rem;
     flex-direction: column;
 }
 
@@ -36,7 +36,8 @@
 /* Mobile only */
 @media (max-width: 480px) {
     .aboutus_page_container {
-        padding: 0rem 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
     /* Styles for mobile devices */
     .aboutus_page_container .header h1 {

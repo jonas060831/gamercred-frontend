@@ -1,3 +1,8 @@
+.page_container {
+    padding-top: 70px; /* navbar height */
+}
+
+
 /* Desktop only */
 @media (min-width: 821px) {
     /* Styles for desktop devices */

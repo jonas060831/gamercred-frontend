@@ -1,20 +1,29 @@
+import { NavLink } from 'react-router-dom'
 import styles from './Footer.module.css'
 
 const Footer = () => {
   return (
     <div className={styles.footer_container}>
         
-        <div>
-
-            © Gamer Cred Inc. 2025
+        <div className={styles.top_content}>
+            
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/register">Register</NavLink>
+            <NavLink to="/report-form">Report Form</NavLink>
+            <NavLink to="/aboutus">About Us</NavLink>
         </div>
+        
+        <div className={styles.bottom_content}>
 
-        <div className={styles.links_container}>
-            <div>
-                Instagram
-            </div>
-            <div>
-                <a href="mailto:.com">Send email</a>
+            <span>© Gamer Cred Inc. 2025</span>
+
+            <div className={styles.links_container}>
+                <div>
+                    Instagram
+                </div>
+                <div>
+                    <a href="mailto:.com">Send email</a>
+                </div>
             </div>
         </div>
     </div>
