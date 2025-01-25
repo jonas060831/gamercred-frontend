@@ -1,0 +1,6 @@
+.steam_button_img {
+    cursor: pointer;
+}
+.steam_button_img:hover {
+    opacity: 0.8;
+}

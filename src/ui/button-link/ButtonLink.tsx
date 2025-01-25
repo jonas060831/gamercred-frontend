@@ -8,7 +8,7 @@ type ButtonLinkProps = {
     title: string
     to: string
     type?: 'primary' | 'outline'
-
+    handleClick?: () => void
 }   
 
 const ButtonLink:FC<ButtonLinkProps> = ({ title, to, type='primary' }) => {

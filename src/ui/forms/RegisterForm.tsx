@@ -4,6 +4,10 @@ import { ChangeEvent, FormEvent, useState } from 'react'
 import { registerUser } from '../../services/authServices'
 // import { useLocation } from 'react-router-dom'
 
+
+
+import { Modal } from "bootstrap" 
+
 const RegisterForm = () => {
 
   
@@ -24,6 +28,11 @@ const RegisterForm = () => {
         } else {
             
             console.log(response)
+            alert('account created successfully')
+            //toggle modal
+            const connectWith3rdParty:any = document.getElementById('connect3rdParty')
+            const boostrapModal = new Modal(connectWith3rdParty)
+            boostrapModal.show()
         }
 
     } catch (error) {
@@ -35,30 +44,30 @@ const RegisterForm = () => {
 
   return (
     <>
+      <form onSubmit={handleSubmit}>
 
-    <form onSubmit={handleSubmit}>
+          <label htmlFor="username">username:</label>
+          <input
+          type="text"
+          name="username"
+          id="username"
+          onChange={handleChange}
+          />
+          <label htmlFor="password">password:</label>
+          <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={handleChange}
+          />
 
-        <label htmlFor="username">username:</label>
-        <input
-        type="text"
-        name="username"
-        id="username"
-        onChange={handleChange}
-        />
-        <label htmlFor="password">password:</label>
-        <input
-        type="password"
-        name="password"
-        id="password"
-        onChange={handleChange}
-        />
+          <input
+          type="submit"
+          value="Register"
+          />
+      </form>    
 
-        <input
-         type="submit"
-         value="Register"
-        />
 
-    </form>    
     </>
   )
 }
