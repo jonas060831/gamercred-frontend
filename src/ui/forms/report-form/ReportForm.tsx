@@ -9,7 +9,7 @@ type Player = {
 
 }
 
-
+import styles from './ReportForm.module.css'
 
 const ReportForm= () => {
  
@@ -83,20 +83,40 @@ const ReportForm= () => {
 
   return (
     <>
-    <form onSubmit={handleSearch}>
+    <form className={styles.report_form} onSubmit={handleSearch}>
 
-    Enter Player Vanity Name or Steam Id: <br />
+    
     <input
      type="text"
      name=""
      value={vanityOrSteamId}
+     className={styles.report_form_input_text}
      onChange={e => setVanityOrSteamId(e.target.value)}
     />
+    
+    <input
+     type="submit"
+     value="Search"
+     className={styles.report_form_input_submit}
+    />
 
-    <input type="submit" value="Search" />
+    <br />
+    
+    <div style={{ width: '100%'}}>
+        <h6>Game Player is being reported on</h6>
+        <select
+         className={styles.select_reported_game}
+         name="game_logged_in_user_have"
+         id="game_logged_in_user_have"
+         defaultValue="Select"
+        >
+            <option value="Select" >Select</option>
+
+        </select>
+    </div>
+
     </form>
-     
-    <h5>result:</h5>
+    {/* <h5>result:</h5>
     {   
         Object.keys(player).length !== 0 ? (
             <>
@@ -108,7 +128,7 @@ const ReportForm= () => {
         ) : (
             <>No Result Found</>
         )
-    }
+    } */}
     </>
     
   )
