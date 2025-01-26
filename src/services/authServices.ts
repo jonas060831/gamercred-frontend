@@ -14,6 +14,8 @@ export const loginUser = async (formData: Record<any, string>) => {
 
         if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         const data = await res.json()
+        
+        console.log(data)
 
         
         return { success: true, data }
@@ -41,7 +43,7 @@ export const registerUser = async (formData: Record<any, string>) :Promise<any> 
         if(!response.ok) {
             throw new Error('Error Creating Account')   
         } else {
-            return { success: true, data }
+            return { success: true, data: data.profile }
         }
         
     } catch (error) {

@@ -5,12 +5,9 @@ const ReportFormPage = () => {
   return (
     <div className="page_container">
         
-        <MastHead header="Report Player" description="">
+        <MastHead header="Report Player" description="" height="auto">
           <ReportForm />
         </MastHead>
-
-        
-
     </div>
   )
 }

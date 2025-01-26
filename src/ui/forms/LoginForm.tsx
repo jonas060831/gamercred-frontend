@@ -30,9 +30,7 @@ const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
             console.log(data)
 
             //add the login user info to local storage
-            localStorage.setItem("user", JSON.stringify(data.user))
-
-            console.log(data.user)
+            localStorage.setItem("user", JSON.stringify(data.profile))
 
             alert(data.message)
 

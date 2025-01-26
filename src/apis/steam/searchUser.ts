@@ -21,8 +21,7 @@ export const getUserSteamProfile = async (steamId:any) => {
 }
 
 
-export const getUserSteamId = async (steamVanityName: any) => {
-
+export const getUserSteamId = async (steamVanityName: any) :Promise<any>=> {
    try {
       const response = await fetch(`${BASE_URL}/api/steam_vanity/?vanityurl=${steamVanityName}`)
 
@@ -31,6 +30,7 @@ export const getUserSteamId = async (steamVanityName: any) => {
       const data = await response.json()
       const { response: playerInfo } = data
 
+      if(playerInfo.success === 42) return { success: true, response: {} }
 
       return { success: true, response: playerInfo.steamid}
 
