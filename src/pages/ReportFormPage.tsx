@@ -1,10 +1,15 @@
 import ReportForm from "../ui/forms/report-form/ReportForm"
+import MastHead from "../ui/masthead/MastHead"
 
 const ReportFormPage = () => {
   return (
     <div className="page_container">
         
-        <ReportForm />
+        <MastHead header="Report Player" description="">
+          <ReportForm />
+        </MastHead>
+
+        
 
     </div>
   )
