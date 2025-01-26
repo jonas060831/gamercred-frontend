@@ -24,8 +24,10 @@ const RegisterForm = () => {
             alert('Problem creating account')
         } else {
             
-            console.log(response)
-            alert('account created successfully')
+            const profile = response.data
+            
+            localStorage.setItem("user", JSON.stringify(profile))
+
             //toggle modal
             const connectWith3rdParty:any = document.getElementById('connect3rdParty')
             const boostrapModal = new Modal(connectWith3rdParty)

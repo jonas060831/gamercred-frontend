@@ -1,4 +1,4 @@
-import { div } from "framer-motion/client"
+
 import { useEffect, useState } from "react"
 
 
@@ -12,15 +12,16 @@ const ProfilePage = () => {
     const user:any = localStorage.getItem('user')
 
     const jsonUser = JSON.parse(user)
-    console.log(JSON.parse(user))
 
     setUser(jsonUser)
+
+    console.log(jsonUser)
   }, [])
 
 
-  if(Object.keys.length === 0) {
+  if(user === null) {
     return (
-      <div>No User Yet</div>
+      <div  > No User Yet</div>
     )
   }
 
@@ -30,17 +31,31 @@ const ProfilePage = () => {
 
       <h1>Logged In User</h1>
 
-      User Id: {user.id} <br />
+      User Id: {user?.id} <br />
 
-      User Name: {user.first_name}
+      User Name: {user.account?.first_name} {user.account?.last_name}
+      <br /><br />
+      {
+        user?.steam_id !== null ? (
+          <>
+            <i className="fa-solid fa-check" style={{ color: 'green' }}></i> Steam Account Linked
+            <br />
+            Steam Id: {user.steam_id}
+          </>
+        ) : (
+          <>
+            Link 3rd Party: <br />
+            <img
+              src="/link_steam_button.png"
+              alt="link button"
+              onClick={() => window.location.href = `${import.meta.env.VITE_BACKEND_SERVER}/link-steam/?user_id=${user.id}`}
+            />
+          
+          </>
+        )
+      }
 
-      <br />
-      Link 3rd Party: <br />
-      <img
-        src="/link_steam_button.png"
-        alt="link button"
-        onClick={() => window.location.href = `${import.meta.env.VITE_BACKEND_SERVER}/link-steam/?user_id=${user.id}`}
-      />
+      
 
     </div>
   )
