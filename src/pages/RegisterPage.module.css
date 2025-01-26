@@ -4,3 +4,14 @@
 .steam_button_img:hover {
     opacity: 0.8;
 }
+
+.register_page_container {
+
+    padding: 10rem 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+

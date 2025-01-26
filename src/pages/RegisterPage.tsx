@@ -9,9 +9,9 @@ const RegisterPage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="page_container">
+    <div className={`${styles.register_page_container} page_container`}>
 
-      <h3>Please Register:</h3>
+      
       <RegisterForm />
 
       <BasicModal
