@@ -38,13 +38,13 @@ export const registerUser = async (formData: Record<any, string>) :Promise<any> 
         const data = await response.json()
 
         if(!response.ok) {
-            console.log('Error Creating Account')
+            throw new Error('Error Creating Account')   
+        } else {
+            return { success: true, data }
         }
-
-        console.log(data)
-
-        return { success: true, data }
+        
     } catch (error) {
         console.log(error)
+        return { success: false, message: error }
     }
 }

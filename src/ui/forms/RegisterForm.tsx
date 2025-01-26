@@ -1,12 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-// import BasicModal from '../modals/BasicModal'
-// import { useLocation, useNavigate } from 'react-router-dom'
 import { registerUser } from '../../services/authServices'
-// import { useLocation } from 'react-router-dom'
-
-
 
 import { Modal } from "bootstrap" 
+
+import styles from './RegisterForm.module.css'
 
 const RegisterForm = () => {
 
@@ -43,7 +40,8 @@ const RegisterForm = () => {
   const handleChange = (event  :ChangeEvent<HTMLInputElement>) :void => setFormData({...formData, [event.target.name] : event.target.value})
 
   return (
-    <>
+    <div className={styles.register_form_container}>
+      <h3>Register</h3>
       <form onSubmit={handleSubmit}>
 
           <label htmlFor="username">username:</label>
@@ -52,6 +50,7 @@ const RegisterForm = () => {
           name="username"
           id="username"
           onChange={handleChange}
+          required
           />
           <label htmlFor="password">password:</label>
           <input
@@ -59,16 +58,17 @@ const RegisterForm = () => {
           name="password"
           id="password"
           onChange={handleChange}
+          required
           />
-
+          <br />
           <input
           type="submit"
           value="Register"
           />
-      </form>    
 
-
-    </>
+          
+      </form>
+    </div>
   )
 }
 
