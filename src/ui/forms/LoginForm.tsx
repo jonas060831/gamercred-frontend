@@ -2,6 +2,7 @@ import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import { loginUser } from '../../services/authServices'
 
 import styles from './LoginForm.module.css'
+import { useNavigate } from 'react-router-dom'
 
 
 type LoginFormProps = {
@@ -9,7 +10,7 @@ type LoginFormProps = {
 }
 
 const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
-
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         username: '',
         password: '' 
@@ -25,7 +26,18 @@ const LoginForm:FC<LoginFormProps> = ({ handleError }) => {
             if(!response.success) handleError(response)
 
             const { data } = response
+
+            console.log(data)
+
+            //add the login user info to local storage
+            localStorage.setItem("user", JSON.stringify(data.user))
+
+            console.log(data.user)
+
             alert(data.message)
+
+            //for now go to profile
+            navigate('/profile')
             
         } catch (error) {
             console.log(error)

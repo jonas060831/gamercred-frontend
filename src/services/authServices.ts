@@ -15,6 +15,7 @@ export const loginUser = async (formData: Record<any, string>) => {
         if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         const data = await res.json()
 
+        
         return { success: true, data }
 
     } catch (error) {

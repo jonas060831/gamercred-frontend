@@ -13,7 +13,8 @@ import styles from './ReportForm.module.css'
 
 const ReportForm= () => {
  
-  const [player, setPlayer] = useState<Player>({})
+  const [_, setPlayer] = useState<Player>({})
+
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
 
   const handleSearch = async (event: any) :Promise<void> => {
