@@ -41,7 +41,20 @@ export const getUserSteamId = async (steamVanityName: any) :Promise<any>=> {
 }
 
 
+export const fetchRecentGames = async (playerId: string) => {
 
    
+   try {
+      
+      const response = await fetch(`${BASE_URL}/game-list/?steamid=${playerId}`)
+   
+      const data = await response.json()
 
-    
+      console.log(data)
+
+      return { success: true, data : data.response }
+
+   } catch (error) {
+      console.log(error)
+   }
+} 
