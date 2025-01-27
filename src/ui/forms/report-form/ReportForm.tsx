@@ -1,4 +1,3 @@
-
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
 import { fetchAllGames, fetchRecentGames } from '../../../apis/steam/searchUser'
@@ -8,14 +7,15 @@ import { createReport } from '../../../services/reportServices'
 
 type ReportFormProps = {
     playerToReport: any
+    setIsOnReportForm: (isOnReportForm: boolean) => void
 }
 
-const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
+const ReportForm:FC<ReportFormProps> = ({ playerToReport, setIsOnReportForm }) => {
 
   const [userGames, setUserGames] = useState<any>([])
   const [authUser, setAuthUser] = useState<any>({})
   const [playerGames, setPlayerGames] = useState<any>([])
-  const [matchedGames, setMatchedGames] = useState<any>([])    
+  const [matchedGames, setMatchedGames] = useState<any>([])
   const [formData, setFormData] = useState<any> ({
     game_id : null
   })
@@ -41,8 +41,6 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     if(event.target.value === 'on') {
         
         setFormData({...formData, [name] : true })
-
-
     }
     
     if(formData[name] === true) {
@@ -57,6 +55,18 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         setFormData(currentFormData)
     }
   }
+
+  const handleGameNameChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = event.target;
+  
+    // Correctly find the selected game using ===
+    const gameSelected = matchedGames.find((game: any) => game.appid === parseInt(value, 10)); //parseInt(value, 10) 10 is the hexadecimal base 10 to parse
+  
+    if (gameSelected) {
+      setFormData({ ...formData, [name]: value, game_name: gameSelected.name });
+    }
+  }
+
   //  due to Steam user account settings we may not be able to see all games owned a steam account so we should filter if the user and steam account have any share recently played games, to validate if a user can make a report
 
   const fetchLoggedInUserGames = async () => {
@@ -99,9 +109,10 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         const matched = userGames.filter((userGame: any) =>  playerGames.some((playerGame: any) => userGame.appid === playerGame.appid));
 
         setMatchedGames(matched)
+
         //default it to first array result
         if(matched.length > 0) {
-            
+
             const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid, game_name: `${matched[0].name}` }
             setFormData(updatedValue)
 
@@ -112,10 +123,10 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
   const handleSubmit = async(event: any) => {
     event.preventDefault()
 
-    console.log(formData)
-    const response = await createReport(formData)
-
-    console.log(response)
+    // console.log(formData)
+    await createReport(formData)
+    setIsOnReportForm(false)
+    //console.log(response)
 
   }
 
@@ -136,21 +147,24 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     <div style={{ width: '100%'}}>
 
         <h6>Game Player is being reported on</h6>
-        <select
-         className={styles.select_reported_game}
-         name="game_id"
-         id="game_id"
-         required
-         onChange={handleChange}
-        >
-            {/* <option value="Select" disabled>Select</option> */}
+
+            <select
+            className={styles.select_reported_game}
+            name="game_id"
+            id="game_id"
+            required
+            onChange={(e: any) => {
+                handleChange(e); // Update the formData for game_id
+                handleGameNameChange(e); // Update the formData for game_name
+            }}
+            defaultValue={matchedGames[0]?.appid || ''}
+            >
             {matchedGames.map((game: any) => (
-                <option key={game.appid} value={game.appid} defaultValue={matchedGames[0].appid}>
-                    {game.name}
+                <option key={game.appid} value={game.appid}>
+                {game.name}
                 </option>
             ))}
-
-        </select>
+            </select>
 
         <div style={{ display: 'flex',  justifyContent: 'flex-start', padding: '2rem', gap: '6rem' }}>
 
@@ -185,7 +199,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         <br /><br />
 
         <label htmlFor="feedback_of_reporter">Feedback of Player</label><br />
-        <textarea name="body_text" id="feedback_of_reporter" onChange={handleChange}></textarea>
+        <textarea name="body_text" id="feedback_of_reporter" onChange={handleChange} required></textarea>
     </div>
 
         <input type="submit" />
