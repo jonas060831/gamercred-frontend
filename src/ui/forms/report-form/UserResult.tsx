@@ -6,40 +6,41 @@ import { Player } from "./PlayerLookUpForm"
 type UserResultProps = {
     playerResult: Player
     handleSearch?: () => void
+    recentSteamGames: any[]
 }
 
 import styles from './UserResult.module.css'
 import ButtonLink from "../../button-link/ButtonLink"
 import { fetchRecentGames } from "../../../apis/steam/searchUser"
 
-const UserResult:FC<UserResultProps> = ({playerResult , handleSearch}) => {
+const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult , handleSearch}) => {
 
-  const [gamesOwned, setGamesOwned] = useState([])
-  const [recentlyPlayed, setRecentlyPlayed] = useState([])
+//   const [gamesOwned, setGamesOwned] = useState([])
+//   const [recentlyPlayed, setRecentlyPlayed] = useState([])
   
-  useEffect(() => {
+//   useEffect(() => {
 
-    fetchRecentlyPlayedGames(playerResult.steamid)
+//     fetchRecentlyPlayedGames(playerResult.steamid)
 
-  },[])
-
-
-  const fetchRecentlyPlayedGames = async(playerId?: string) => {
-
-   const response:any = await fetchRecentGames(playerId!)
+//   },[])
 
 
-   //forks to handle user not having any game and user having games
-   if(!response.data) console.log('No games yet')
+//   const fetchRecentlyPlayedGames = async(playerId?: string) => {
 
-   else {
-    //definetly have games
-    console.log(response.data.response.games)
-    setRecentlyPlayed(response.data.response.games)
+//    const response:any = await fetchRecentGames(playerId!)
 
-   }
 
-  }
+//    //forks to handle user not having any game and user having games
+//    if(!response.data) console.log('No games yet')
+
+//    else {
+//     //definetly have games
+//     console.log(response.data.response.games)
+//     setRecentlyPlayed(response.data.response.games)
+
+//    }
+
+//   }
 
   return (
     <div
@@ -69,16 +70,16 @@ const UserResult:FC<UserResultProps> = ({playerResult , handleSearch}) => {
                 </div>
                 
                 <div>
-                    recent games played: { recentlyPlayed.length } <br />
+                    recent games played: { recentSteamGames.length } <br />
                     
 
                     {
-                        recentlyPlayed.length === 0 ? (
+                        recentSteamGames.length === 0 ? (
                             <></>
                         ) : (
                             <>
                                 {
-                                    recentlyPlayed.map((game:any, index) => (
+                                    recentSteamGames.map((game:any, index) => (
 
 
                                         <div key={index} style={{ display: 'flex' }}>
