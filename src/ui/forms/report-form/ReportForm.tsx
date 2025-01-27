@@ -1,7 +1,7 @@
 
 import { FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
-import { fetchAllGames } from '../../../apis/steam/searchUser'
+import { fetchAllGames, fetchRecentGames } from '../../../apis/steam/searchUser'
 import { test_games } from '../../../datas/testgames'
 
 type ReportFormProps = {
@@ -16,33 +16,62 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
  
   //get the games the loggedInUser is Playing vs playerToReport
   useEffect(() => {
-
-    fetchLoggedInUserGames()
-    fetchPlayerToReportGames()
+    const fetchGamelist = async () => {
+        fetchLoggedInUserGames()
+        fetchPlayerToReportGames()
+    } 
+    fetchGamelist()
 
   }, [])
 
-  
+//  due to Steam user account settings we may not be able to see all games owned a steam account so we should filter if the user and steam account have any share recently played games, to validate if a user can make a report
 
   const fetchLoggedInUserGames = async() => {
 
         const user:any = localStorage.getItem('user')
         const parsedUser:any = JSON.parse(user)
         const userId = parsedUser.steam_id
-        const allGames = await fetchAllGames(userId)
-        setUserGames(allGames)
+        // console.log(userId);
+        
+        const allGames: any = await fetchRecentGames(userId)
+        // console.log(allGames);
+        
+        setUserGames(allGames.data)
+        // console.log(userGames);
+              
 
-        if(import.meta.env.VITE_NODE_ENV === 'development') {
-            setUserGames(test_games)
-        }
+        // if(import.meta.env.VITE_NODE_ENV === 'development') {
+        //     setUserGames(test_games)   
+        // }
  }
 
   const fetchPlayerToReportGames = async() => {
     const player: any = playerToReport.steamid
-    const allGames = await fetchAllGames(player)
-    setPlayerGames(allGames)
+    // console.log(player);
+    
+    const allGames: any = await fetchRecentGames(player)
+    // console.log(allGames);
+    
+    setPlayerGames(allGames.data)
+    // console.log(playerGames);
+    
 
   }
+
+  useEffect(()=> {
+    console.log('user games', userGames);
+    console.log('player games:', playerGames);
+    
+    
+    if (userGames.length > 0 && playerGames.length > 0){
+        const matched: any = userGames.filter((userGame: any) => 
+            playerGames.some((playerGame: any) => userGame.appid === playerGame.appid));
+        setMatchedGames(matched)
+    }
+  }, [userGames, playerGames])
+
+  console.log(matchedGames);
+  
 
   return (
     <>
@@ -65,6 +94,11 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
          defaultValue="Select"
         >
             <option value="Select" >Select</option>
+            {matchedGames.map((game: any) => (
+                <option key={game.appid} value={game.appid}>
+                    {game.name}
+                    </option>
+            ))}
 
         </select>
 
@@ -156,7 +190,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         <input type="submit" />
 
 
-        { JSON.stringify(userGames) }
+        { JSON.stringify(matchedGames) }
         {/* { JSON.stringify(playerGames) } */}
 
     </form>
