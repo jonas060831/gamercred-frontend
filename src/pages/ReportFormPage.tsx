@@ -68,7 +68,9 @@ const ReportFormPage = () => {
                     const recentReports: any = await fetchReports(playerSteamId)
 
                     console.log(recentReports)
-                    if(recentReports.success) setReport(recentReports.data)
+
+
+                    if(recentReports.success) setReport(recentReports.data.reports)
                     else setReport([])
 
 
@@ -100,8 +102,11 @@ const ReportFormPage = () => {
 
                 //getting the reports for this player
                 const recentReports: any = await fetchReports(vanityOrSteamId)
-                if(recentReports.success) setReport(recentReports.data)
+                
+                if(recentReports.success) setReport(recentReports.data.reports)
                 else setReport([])
+
+                console.log(recentReports)
 
             } catch (error) {
                 console.log(error)
