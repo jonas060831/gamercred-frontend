@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 // import ReportForm from "../ui/forms/report-form/ReportForm"
 import MastHead from "../ui/masthead/MastHead"
 import PlayerLookUpForm from "../ui/forms/report-form/PlayerLookUpForm"
-import { getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
+import { fetchRecentGames, getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
 
 const ReportFormPage = () => {
 
   const [playerToReport, setplayerToReport] = useState({})
+  const [recentSteamGames, setRecentSteamGames] = useState([])
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
 
 
@@ -48,8 +49,24 @@ const ReportFormPage = () => {
                         console.log('no player found')
                         setplayerToReport({ personaname: '42' })
                     }
-                    //account created successfully
+
+                    const response:any = await fetchRecentGames(playerSteamId!)
+                     
+                     
+                    //forks to handle user not having any game and user having games
+                    if(!response.data) console.log('No games yet')
+                 
+                    else {
+                     //definetly have games
+                     console.log(response.data.response.games)
+                     setRecentSteamGames(response.data.response.games)
+                 
+                    }
+
+                    //player found successfully
                     setplayerToReport(playerInfo)
+
+
                 } else {
                     setplayerToReport({personaname: '42'})
                 }
@@ -68,6 +85,19 @@ const ReportFormPage = () => {
                 if(!success) {
                     alert('No Details found')
                     throw new Error("No Details Found")
+                }
+
+                const response:any = await fetchRecentGames(vanityOrSteamId)
+                     
+                     
+                //forks to handle user not having any game and user having games
+                if(!response.data) console.log('No games yet')
+             
+                else {
+                 //definetly have games
+                 console.log(response.data.response.games)
+                 setRecentSteamGames(response.data.response.games)
+             
                 }
 
                 setplayerToReport(playerInfo)
@@ -91,6 +121,7 @@ const ReportFormPage = () => {
              handleSearch={handleSearch}
              vanityOrSteamId={vanityOrSteamId}
              setVanityOrSteamId={setVanityOrSteamId}
+             recentSteamGames={recentSteamGames}
             />
         </MastHead>
     </div>

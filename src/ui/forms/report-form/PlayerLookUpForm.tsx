@@ -17,22 +17,23 @@ type PlayerLookUpFormProps = {
     handleSearch: (input: any) => any
     vanityOrSteamId : string
     setVanityOrSteamId: (input:any) => any
+    recentSteamGames: any[]
 }
 
-const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId }) => {
+const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId }) => {
 
 
     
-    const handleSubmit = async (event:any) => {
+    // const handleSubmit = async (event:any) => {
 
-        event.preventDefault()
+    //     event.preventDefault()
         
-        handleSearch(event)
+    //     handleSearch(event)
 
-    }
+    // }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSearch}>
         <input
             type="text"
             name=""
@@ -59,7 +60,10 @@ const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ playerToReport, handleSear
                             
                             <> No Result Found</>
                         ) :
-                        ( <UserResult playerResult={playerToReport} /> )
+                        ( <UserResult 
+                            playerResult={playerToReport}
+                            recentSteamGames={recentSteamGames}
+                            /> )
                     }
                     </>
                 )
