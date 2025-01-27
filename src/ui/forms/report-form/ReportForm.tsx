@@ -41,6 +41,8 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     if(event.target.value === 'on') {
         
         setFormData({...formData, [name] : true })
+
+
     }
     
     if(formData[name] === true) {
@@ -97,11 +99,10 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         const matched = userGames.filter((userGame: any) =>  playerGames.some((playerGame: any) => userGame.appid === playerGame.appid));
 
         setMatchedGames(matched)
-
         //default it to first array result
         if(matched.length > 0) {
-
-            const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid }
+            
+            const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid, game_name: `${matched[0].name}` }
             setFormData(updatedValue)
 
         }

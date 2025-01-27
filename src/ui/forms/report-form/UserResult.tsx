@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react"
+import { FC } from "react"
 
 import { Player } from "./PlayerLookUpForm"
 
@@ -12,6 +12,7 @@ type UserResultProps = {
 
 import styles from './UserResult.module.css'
 import ButtonLink from "../../button-link/ButtonLink"
+import ReportCard from "./ReportCard"
 
 
 const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm, reports}) => {
@@ -31,6 +32,7 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
   }
 
   return (
+    <>
     <div
      style={{
         display: 'flex',
@@ -122,14 +124,26 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
 
         </div>
 
-
-
         {/* reputation bar */}
         <div>
             <progress value="32" max="100" style={{ width: '100%' }}>32%</progress>
         </div>
-
     </div>
+    
+    <br /><br />
+    
+    {
+        reports.length === 0  ? (
+            <>No reports yet!</>
+        ) : (
+            <>
+                {reports.map((report: any, index: number) => (
+                        <ReportCard key={index} report={report}/>
+                ))}
+            </>
+        )
+    }
+    </>
   )
 }
 
