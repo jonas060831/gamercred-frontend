@@ -1,6 +1,6 @@
 export const player_experiences = [
     {
-        value: 'harrassment',
+        value: 'harassment',
         text: 'Harassment'
     },
     {
@@ -12,7 +12,7 @@ export const player_experiences = [
         text: 'Racism'
     },
     {
-        value: 'sexual_harrasment',
+        value: 'sexual_harassment',
         text: 'Sexual Harassment'
     },
     {
