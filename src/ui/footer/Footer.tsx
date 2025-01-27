@@ -22,7 +22,7 @@ const Footer = () => {
                     Instagram
                 </div>
                 <div>
-                    <a href="mailto:.com">Send email</a>
+                    <a href="mailto:gamercredofficial@gmail.com">Send email</a>
                 </div>
             </div>
         </div>

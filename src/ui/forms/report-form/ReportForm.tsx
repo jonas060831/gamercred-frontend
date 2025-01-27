@@ -1,10 +1,50 @@
 
+import { FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
+import { fetchAllGames } from '../../../apis/steam/searchUser'
 
-const ReportForm= () => {
+type ReportFormProps = {
+    playerToReport: any
+}
+
+const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
+
+  const [userGames, setUserGames] = useState<any>([])
+  const [playerGames, setPlayerGames] = useState<any>([])
+  const [matchedGames, setMatchedGames] = useState<any>([])
+ 
+  //get the games the loggedInUser is Playing vs playerToReport
+  useEffect(() => {
+
+    fetchLoggedInUserGames()
+
+  })
+
+  const fetchLoggedInUserGames = async() => {
+    
+    const user:any = localStorage.getItem('user')
+    const parsedUser:any = JSON.parse(user)
+    
+    const userId = parsedUser.steam_id
+
+
+    const userGames = await fetchAllGames(userId)
+
+    console.log(userGames)
+  }
+
+  const fetchPlayerToReportGames = async() => {
+
+  }
+
   return (
     <>
     <form className={styles.report_form} onSubmit={() => {}}>
+
+    <div>
+        <img src={playerToReport.avatarfull} alt='player_to_report_img' style={{ width: '3rem', borderRadius: '100vw' }}/>
+        &nbsp;<span>{playerToReport.personaname}</span>
+    </div>
     
     <div style={{ width: '100%'}}>
 
