@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
 import { fetchAllGames } from '../../../apis/steam/searchUser'
+import { test_games } from '../../../datas/testgames'
 
 type ReportFormProps = {
     playerToReport: any
@@ -17,23 +18,36 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
   useEffect(() => {
 
     fetchLoggedInUserGames()
+    fetchPlayerToReportGames()
 
-  })
+  }, [])
 
   const fetchLoggedInUserGames = async() => {
     
     const user:any = localStorage.getItem('user')
     const parsedUser:any = JSON.parse(user)
     
-    const userId = parsedUser.steam_id
+    const userSteamId = parsedUser.steam_id
 
 
-    const userGames = await fetchAllGames(userId)
+    const allUserGames = await fetchAllGames(userSteamId)
+    
+    //development env so we can have a matching data to fiona
+    if(import.meta.env.VITE_NODE_ENV == 'development' && allUserGames?.games === undefined) {
+        console.log(123)
+        setUserGames(test_games)
+    } else {
+        
+        setUserGames(allUserGames?.games)
+    }
 
-    console.log(userGames)
   }
 
   const fetchPlayerToReportGames = async() => {
+
+    const response = await fetchAllGames(playerToReport.steamid)
+    console.log(playerToReport.steamid)
+    console.log(response)
 
   }
 
