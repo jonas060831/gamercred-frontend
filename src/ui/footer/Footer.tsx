@@ -19,7 +19,10 @@ const Footer = () => {
 
             <div className={styles.links_container}>
                 <div>
-                    Instagram
+                    <a href='https://discord.gg/at89vhZRmn' target='_blank' rel='noopener noreferrer'><i class="fa-brands fa-discord"></i> Join Our Discord</a>
+                </div>
+                <div>
+                <i class="fa-brands fa-instagram"></i> Instagram
                 </div>
                 <div>
                     <a href="mailto:.com">Send email</a>
