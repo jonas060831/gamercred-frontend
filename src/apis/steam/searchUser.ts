@@ -66,9 +66,7 @@ export const fetchAllGames = async (steamId: string) => {
 
       const games = await response.json()
 
-      console.log(games)
-
-      return { success: true, games : games.allgames }
+      return { success: true, games : games.all_games }
 
    } catch (error) {
       

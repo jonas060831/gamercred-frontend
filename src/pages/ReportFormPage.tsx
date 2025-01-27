@@ -3,7 +3,6 @@ import { useState } from "react"
 import MastHead from "../ui/masthead/MastHead"
 import PlayerLookUpForm from "../ui/forms/report-form/PlayerLookUpForm"
 import { fetchRecentGames, getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
-import { div } from "framer-motion/m"
 import ReportForm from "../ui/forms/report-form/ReportForm"
 
 const ReportFormPage = () => {
@@ -103,7 +102,6 @@ const ReportFormPage = () => {
              
                 else {
                  //definetly have games
-                 console.log(recentgames.data)
                  setRecentSteamGames(recentgames.data)
              
                 }

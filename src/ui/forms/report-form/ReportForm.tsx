@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
 import { fetchAllGames } from '../../../apis/steam/searchUser'
-import { Await } from 'react-router-dom'
+import { test_games } from '../../../datas/testgames'
 
 type ReportFormProps = {
     playerToReport: any
@@ -22,29 +22,27 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
 
   }, [])
 
+  
+
   const fetchLoggedInUserGames = async() => {
-    
-    const user:any = localStorage.getItem('user')
-    const parsedUser:any = JSON.parse(user)
-    
-    const userId = parsedUser.steam_id
 
+        const user:any = localStorage.getItem('user')
+        const parsedUser:any = JSON.parse(user)
+        const userId = parsedUser.steam_id
+        const allGames = await fetchAllGames(userId)
+        setUserGames(allGames)
 
-    const allGames = await fetchAllGames(userId)
-
-    setUserGames(allGames)
-    
-}
+        if(import.meta.env.VITE_NODE_ENV === 'development') {
+            setUserGames(test_games)
+        }
+ }
 
   const fetchPlayerToReportGames = async() => {
-
     const player: any = playerToReport.steamid
     const allGames = await fetchAllGames(player)
-    setPlayerGames(allGames) 
-    
-  }
+    setPlayerGames(allGames)
 
-  
+  }
 
   return (
     <>
@@ -156,6 +154,10 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     </div>
 
         <input type="submit" />
+
+
+        { JSON.stringify(userGames) }
+        {/* { JSON.stringify(playerGames) } */}
 
     </form>
     
