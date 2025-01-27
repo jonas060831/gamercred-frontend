@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import ReportForm from "../ui/forms/report-form/ReportForm"
+// import ReportForm from "../ui/forms/report-form/ReportForm"
 import MastHead from "../ui/masthead/MastHead"
 import PlayerLookUpForm from "../ui/forms/report-form/PlayerLookUpForm"
 import { getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
@@ -9,6 +9,8 @@ const ReportFormPage = () => {
   const [playerToReport, setplayerToReport] = useState({})
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
 
+
+  //this will get trigger once search button is clicked
   const handleSearch = async (event: any) :Promise<void> => {
     event.preventDefault()
 
@@ -46,7 +48,6 @@ const ReportFormPage = () => {
                         console.log('no player found')
                         setplayerToReport({ personaname: '42' })
                     }
-
                     //account created successfully
                     setplayerToReport(playerInfo)
                 } else {
@@ -79,9 +80,7 @@ const ReportFormPage = () => {
     }
   }
 
-  useEffect(() => {
 
-  }, [playerToReport])
   
   return (
     <div className="page_container">
