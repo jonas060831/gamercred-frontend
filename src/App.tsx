@@ -9,6 +9,7 @@ import ReportFormPage from "./pages/ReportFormPage";
 import Footer from "./ui/footer/Footer";
 import AboutUsPage from "./pages/AboutUsPage";
 import ProfilePage from "./pages/ProfilePage";
+import EditReportPage from "./pages/EditReportPage";
 
 const  App = ()  => {
 
@@ -21,6 +22,7 @@ const  App = ()  => {
           <Route path='/register' element= {<RegisterPage />} />
           <Route path="/login" element={ <LoginPage/> }/>
           <Route path="/report-form" element={<ReportFormPage />} />
+          <Route path="/report-form/:steam_id" element={<EditReportPage />} />
           <Route path="/aboutus" element={<AboutUsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
         </Routes>

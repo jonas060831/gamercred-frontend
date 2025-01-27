@@ -1,4 +1,5 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
+import ButtonLink from '../../button-link/ButtonLink'
 
 
 type ReportProps = {
@@ -6,24 +7,69 @@ type ReportProps = {
 }
 
 const ReportCard:FC<ReportProps> = ({ report }) => {
+  
+  const [user, setUser] = useState<any>({})
 
   useEffect(() => {
-    console.log('coming from Reportcard', report)
-  })
+    // console.log('coming from Reportcard', report)
+
+    // console.log('report owner', report.report_owner_id)
+
+    getAuthUser()
+  }, [])
+
+  const getAuthUser = () => {
+    
+    try {
+        const user:any = localStorage.getItem('user')
+        const parsedUser = JSON.parse(user)
+
+
+        console.log(parsedUser)
+        if(!parsedUser) new Error('no user found')
+
+        console.log(parsedUser.id)
+
+        setUser(parsedUser)
+    } catch (error) {
+        console.log(error)
+    }
+
+
+  }
+
+  //avatar of the user
+
   return (
     <div style={{ margin: '2rem 0rem', backgroundColor: 'black', border: '2px solid green', padding: '1rem', borderRadius: '5px' }}>
         
         <div>
-            avatar of the user that made the report, game icon, game title,
+            <span style={{ color: 'red' }}>{ report.game_name }</span>
+            <br />
+            body text {report.body_text} <br />
+            Reported on <span>{new Date(report.timestamp).toISOString().slice(0,10)}</span>
+            {/* of the user that made the report, game icon, game title,
             images array or video
-            reports from other players
-            
+            reports from other players */}
+
         </div>
 
         <div>
             incident text if any
         </div>
-        <button>Edit</button>
+       
+
+        {
+            user.id  ===  parseInt(report.report_owner_id) ? (
+                <>
+                    <ButtonLink to={`/report-form/${report.id}`} title='Edit'/>
+                    <button>Delete</button>
+                </>
+            ) : (
+                <></>
+            )
+        }
+
     </div>
   )
 }

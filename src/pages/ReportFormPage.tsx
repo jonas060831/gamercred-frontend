@@ -123,6 +123,7 @@ const ReportFormPage = () => {
      <MastHead header="Report Player" description="" height="auto">
         <ReportForm
          playerToReport={playerToReport}
+         setIsOnReportForm={setIsOnReportForm}
         />
      </MastHead>
     )
