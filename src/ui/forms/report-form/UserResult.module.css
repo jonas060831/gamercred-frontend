@@ -1,0 +1,21 @@
+.left_and_right_ui {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+
+.header {
+    display: flex;
+    text-align: left;
+    gap: 1rem;
+    flex-direction: column;
+}
+
+.header img {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 100vw;
+    border: 3px solid gray;
+
+}
