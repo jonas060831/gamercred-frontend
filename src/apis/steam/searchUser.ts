@@ -50,11 +50,26 @@ export const fetchRecentGames = async (playerId: string) => {
    
       const data = await response.json()
 
-      console.log(data)
-
-      return { success: true, data : data.response }
+      return { success: true, data : data.recent_games}
 
    } catch (error) {
       console.log(error)
    }
-} 
+}
+
+export const fetchAllGames = async (steamId: string) => {
+   
+   try {
+      const response = await fetch(`${BASE_URL}/complete-game-list/?steamid=${steamId}`)
+
+      const games = await response.json()
+
+      console.log(games)
+
+      return { success: true, games : games.allgames }
+
+   } catch (error) {
+      
+   }
+
+}

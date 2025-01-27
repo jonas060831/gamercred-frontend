@@ -1,5 +1,5 @@
-import { FC, useEffect, useState } from "react"
-
+import { FC, useEffect } from "react"
+import { motion, useAnimation } from "framer-motion"
 
 import { Player } from "./PlayerLookUpForm"
 
@@ -7,40 +7,49 @@ type UserResultProps = {
     playerResult: Player
     handleSearch?: () => void
     recentSteamGames: any[]
+    setIsOnReportForm: (isOnReport: boolean) => void
 }
 
 import styles from './UserResult.module.css'
 import ButtonLink from "../../button-link/ButtonLink"
-import { fetchRecentGames } from "../../../apis/steam/searchUser"
-
-const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult , handleSearch}) => {
-
-//   const [gamesOwned, setGamesOwned] = useState([])
-//   const [recentlyPlayed, setRecentlyPlayed] = useState([])
-  
-//   useEffect(() => {
-
-//     fetchRecentlyPlayedGames(playerResult.steamid)
-
-//   },[])
 
 
-//   const fetchRecentlyPlayedGames = async(playerId?: string) => {
+const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm}) => {
 
-//    const response:any = await fetchRecentGames(playerId!)
+    const randomDuration = () => Math.random() * 0.07 + 0.23;
+    const controls = useAnimation();
+    const getRandomTransformOrigin = () => {
+        const value = (16 + 40 * Math.random()) / 100;
+        const value2 = (15 + 36 * Math.random()) / 100;
+        return {
+        originX: value,
+        originY: value2
+        };
+    };
 
 
-//    //forks to handle user not having any game and user having games
-//    if(!response.data) console.log('No games yet')
+    const variants = {
+    start: (i:any) => ({
+        rotate: i % 2 === 0 ? [-1, 1.3, 0] : [1, -1.4, 0],
+        transition: {
+        delay: 1,
+        repeat: Infinity,
+        duration: randomDuration()
+        }
+    }),
+    reset: {
+        rotate: 0
+    }
+    };
 
-//    else {
-//     //definetly have games
-//     console.log(response.data.response.games)
-//     setRecentlyPlayed(response.data.response.games)
+    useEffect(() => {
+        controls.start('start')
+    })
 
-//    }
 
-//   }
+  const handleStartReport = (event: any) => {
+    setIsOnReportForm(true)
+  }
 
   return (
     <div
@@ -94,7 +103,25 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult , handle
 
                 </div>
 
-                <button >Report Player</button>
+                
+
+                <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    style={{
+                        ...getRandomTransformOrigin(),
+                        backgroundColor: '#fa9806',
+                        height: '3rem',
+                        border:'none',
+                        borderRadius: '5px'
+                    }}
+                    variants={variants}
+                    animate={controls}
+                    onClick={handleStartReport}
+                >
+                    <i className="fa-solid fa-user-pen"></i> Report Player
+                </motion.button>
+
             </div>
 
 

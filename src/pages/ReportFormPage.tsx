@@ -1,18 +1,23 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 // import ReportForm from "../ui/forms/report-form/ReportForm"
 import MastHead from "../ui/masthead/MastHead"
 import PlayerLookUpForm from "../ui/forms/report-form/PlayerLookUpForm"
 import { fetchRecentGames, getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
+import { div } from "framer-motion/m"
+import ReportForm from "../ui/forms/report-form/ReportForm"
 
 const ReportFormPage = () => {
 
   const [playerToReport, setplayerToReport] = useState({})
+  const [isOnReportForm, setIsOnReportForm] = useState<boolean>(false)
   const [recentSteamGames, setRecentSteamGames] = useState([])
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
 
 
   //this will get trigger once search button is clicked
   const handleSearch = async (event: any) :Promise<void> => {
+    event.stopPropagation()
+    
     event.preventDefault()
 
     if(vanityOrSteamId === '') {
@@ -50,16 +55,17 @@ const ReportFormPage = () => {
                         setplayerToReport({ personaname: '42' })
                     }
 
-                    const response:any = await fetchRecentGames(playerSteamId!)
+                    const recentgames:any = await fetchRecentGames(playerSteamId!)
                      
                      
                     //forks to handle user not having any game and user having games
-                    if(!response.data) console.log('No games yet')
+                    if(!recentgames.data) console.log('No games yet')
                  
                     else {
                      //definetly have games
-                     console.log(response.data.response.games)
-                     setRecentSteamGames(response.data.response.games)
+                     console.log(recentgames.data)
+
+                     setRecentSteamGames(recentgames.data)
                  
                     }
 
@@ -87,16 +93,16 @@ const ReportFormPage = () => {
                     throw new Error("No Details Found")
                 }
 
-                const response:any = await fetchRecentGames(vanityOrSteamId)
+                const recentgames:any = await fetchRecentGames(vanityOrSteamId)
                      
                      
                 //forks to handle user not having any game and user having games
-                if(!response.data) console.log('No games yet')
+                if(!recentgames.data) console.log('No games yet')
              
                 else {
                  //definetly have games
-                 console.log(response.data.response.games)
-                 setRecentSteamGames(response.data.response.games)
+                 console.log(recentgames.data)
+                 setRecentSteamGames(recentgames.data)
              
                 }
 
@@ -112,6 +118,16 @@ const ReportFormPage = () => {
 
 
   
+  if(isOnReportForm) {
+    return (
+     <MastHead header="Report Player" description="" height="auto">
+        <ReportForm
+         playerToReport={playerToReport}
+        />
+     </MastHead>
+    )
+  }
+
   return (
     <div className="page_container">
         
@@ -122,6 +138,7 @@ const ReportFormPage = () => {
              vanityOrSteamId={vanityOrSteamId}
              setVanityOrSteamId={setVanityOrSteamId}
              recentSteamGames={recentSteamGames}
+             setIsOnReportForm={setIsOnReportForm}
             />
         </MastHead>
     </div>

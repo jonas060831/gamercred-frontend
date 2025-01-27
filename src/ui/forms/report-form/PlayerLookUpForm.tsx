@@ -6,6 +6,7 @@ export type Player = {
     avatar?: string
     personaname?: string
     steamid?: string
+    
 
 }
 
@@ -18,22 +19,21 @@ type PlayerLookUpFormProps = {
     vanityOrSteamId : string
     setVanityOrSteamId: (input:any) => any
     recentSteamGames: any[]
+    setIsOnReportForm: (isOnReport: boolean) => void
 }
 
-const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId }) => {
+const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId, setIsOnReportForm }) => {
 
 
     
-    // const handleSubmit = async (event:any) => {
+    const handleSubmit = async (event:any) => {
 
-    //     event.preventDefault()
-        
-    //     handleSearch(event)
-
-    // }
+        event.preventDefault()
+        handleSearch(event)
+    }
 
   return (
-    <form onSubmit={handleSearch}>
+    <form name='playerlookup' onSubmit={handleSubmit}>
         <input
             type="text"
             name=""
@@ -63,6 +63,7 @@ const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerTo
                         ( <UserResult 
                             playerResult={playerToReport}
                             recentSteamGames={recentSteamGames}
+                            setIsOnReportForm={setIsOnReportForm}
                             /> )
                     }
                     </>
