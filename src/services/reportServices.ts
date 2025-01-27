@@ -26,13 +26,14 @@ export const createReport = async (formData: any) => {
 export const fetchReports = async (steamId: any) => {
     
     try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/reports/incident/?player_reported=${steamId}`)
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/reports/results/?player_reported=${steamId}`)
 
-        const data = await response.json()
+        const reports = await response.json()
 
-        console.log(data)
+        if(reports.nessage === 'No Reports found for the specifed player') return { success: false, data : [] }
 
-        return { success: true, data }
+
+        return { success: true, data : reports }
     } catch (error) {
         return { success: false, message: 'Cannot retrieve reports', error }
     }
