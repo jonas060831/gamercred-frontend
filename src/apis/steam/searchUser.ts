@@ -2,8 +2,6 @@ const BASE_URL = import.meta.env.VITE_BACKEND_SERVER
 
 
 export const getUserSteamProfile = async (steamId:any) => {
-
-
    try {
 
        const response = await fetch(`${BASE_URL}/api/steam_user/?steamid=${steamId}`)
@@ -45,7 +43,6 @@ export const getUserSteamId = async (steamVanityName: any) :Promise<any>=> {
 
 export const fetchRecentGames = async (playerId: string) => {
 
-   
    try {
       
       const response = await fetch(`${BASE_URL}/game-list/?steamid=${playerId}`)

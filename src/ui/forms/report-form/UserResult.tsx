@@ -1,5 +1,4 @@
-import { FC, useEffect } from "react"
-import { motion, useAnimation } from "framer-motion"
+import { FC } from "react"
 
 import { Player } from "./PlayerLookUpForm"
 
@@ -16,39 +15,17 @@ import ButtonLink from "../../button-link/ButtonLink"
 
 const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm}) => {
 
-    const randomDuration = () => Math.random() * 0.07 + 0.23;
-    const controls = useAnimation();
-    const getRandomTransformOrigin = () => {
-        const value = (16 + 40 * Math.random()) / 100;
-        const value2 = (15 + 36 * Math.random()) / 100;
-        return {
-        originX: value,
-        originY: value2
-        };
-    };
+  const handleStartReport = (_: any) => {
 
+    const user:any = localStorage.getItem('user')
 
-    const variants = {
-    start: (i:any) => ({
-        rotate: i % 2 === 0 ? [-1, 1.3, 0] : [1, -1.4, 0],
-        transition: {
-        delay: 1,
-        repeat: Infinity,
-        duration: randomDuration()
-        }
-    }),
-    reset: {
-        rotate: 0
+    const parsedUser = JSON.parse(user)
+
+    if(!parsedUser) alert('you must login to continue')
+    
+    else {
+        setIsOnReportForm(true)
     }
-    };
-
-    useEffect(() => {
-        controls.start('start')
-    })
-
-
-  const handleStartReport = (event: any) => {
-    setIsOnReportForm(true)
   }
 
   return (
@@ -103,24 +80,17 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
 
                 </div>
 
+                {/* if no recent played games within 2 weeks then this user cannot be reported */}
+                {
+                    recentSteamGames.length === 0 ? (
+                        <></>
+                    ) : (
+                        <button onClick={handleStartReport}>
+                          <i className="fa-solid fa-user-pen"></i> Report Player    
+                        </button>
+                    )
+                }
                 
-
-                <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    style={{
-                        ...getRandomTransformOrigin(),
-                        backgroundColor: '#fa9806',
-                        height: '3rem',
-                        border:'none',
-                        borderRadius: '5px'
-                    }}
-                    variants={variants}
-                    animate={controls}
-                    onClick={handleStartReport}
-                >
-                    <i className="fa-solid fa-user-pen"></i> Report Player
-                </motion.button>
 
             </div>
 

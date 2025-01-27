@@ -61,8 +61,7 @@ const ReportFormPage = () => {
                     if(!recentgames.data) console.log('No games yet')
                  
                     else {
-                     //definetly have games
-                     console.log(recentgames.data)
+                     //definetly have game
 
                      setRecentSteamGames(recentgames.data)
                  
@@ -70,9 +69,6 @@ const ReportFormPage = () => {
 
                     //player found successfully
                     setplayerToReport(playerInfo)
-                    console.log(playerInfo);
-                    
-
 
                 } else {
                     setplayerToReport({personaname: '42'})
