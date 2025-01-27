@@ -71,6 +71,8 @@ const ReportFormPage = () => {
 
                     //player found successfully
                     setplayerToReport(playerInfo)
+                    console.log(playerInfo);
+                    
 
 
                 } else {

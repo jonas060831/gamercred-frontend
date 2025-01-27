@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from 'react'
 import styles from './ReportForm.module.css'
 import { fetchAllGames } from '../../../apis/steam/searchUser'
+import { Await } from 'react-router-dom'
 
 type ReportFormProps = {
     playerToReport: any
@@ -17,8 +18,9 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
   useEffect(() => {
 
     fetchLoggedInUserGames()
+    fetchPlayerToReportGames()
 
-  })
+  }, [])
 
   const fetchLoggedInUserGames = async() => {
     
@@ -28,14 +30,21 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     const userId = parsedUser.steam_id
 
 
-    const userGames = await fetchAllGames(userId)
+    const allGames = await fetchAllGames(userId)
 
-    console.log(userGames)
-  }
+    setUserGames(allGames)
+    
+}
 
   const fetchPlayerToReportGames = async() => {
 
+    const player: any = playerToReport.steamid
+    const allGames = await fetchAllGames(player)
+    setPlayerGames(allGames) 
+    
   }
+
+  
 
   return (
     <>
