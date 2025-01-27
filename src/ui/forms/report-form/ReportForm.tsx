@@ -4,6 +4,7 @@ import styles from './ReportForm.module.css'
 import { fetchAllGames, fetchRecentGames } from '../../../apis/steam/searchUser'
 import { test_games } from '../../../datas/testgames'
 import { player_experiences, player_experiences2 } from '../../../datas/player_experiences'
+import { createReport } from '../../../services/reportServices'
 
 type ReportFormProps = {
     playerToReport: any
@@ -112,8 +113,9 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     event.preventDefault()
 
     
+    const response = await createReport(formData)
 
-    console.log(formData)
+    console.log(response)
 
   }
 
