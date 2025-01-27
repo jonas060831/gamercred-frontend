@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Player } from "./PlayerLookUpForm"
 
@@ -7,13 +7,15 @@ type UserResultProps = {
     handleSearch?: () => void
     recentSteamGames: any[]
     setIsOnReportForm: (isOnReport: boolean) => void
+    reports: any
 }
 
 import styles from './UserResult.module.css'
 import ButtonLink from "../../button-link/ButtonLink"
 
 
-const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm}) => {
+const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm, reports}) => {
+  
 
   const handleStartReport = (_: any) => {
 
@@ -103,7 +105,18 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
                 <br />
                 
                 <div>
-                    Some Chart
+                    
+                    {
+                        reports.length === 0? (
+                            <>No reports yet!</>
+                        ) : (
+                            <> 
+                                <br /><br />
+                                Reports : {reports.length}
+                            </>
+                        )
+                    }
+
                 </div>
             </div>
 

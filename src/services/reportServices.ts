@@ -14,14 +14,26 @@ export const createReport = async (formData: any) => {
 
         if(!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
         const data = await res.json()
-        
-        console.log(data)
-
-        
+                
         return { success: true, data }
 
     } catch (error) {
-        return { success: false, message: 'An error occured during login', error }
+        return { success: false, message: 'cannot create report', error }
     }
 
 }
+
+export const fetchReports = async (steamId: any) => {
+    
+    try {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/reports/incident/?player_reported=${steamId}`)
+
+        const data = await response.json()
+
+        console.log(data)
+
+        return { success: true, data }
+    } catch (error) {
+        return { success: false, message: 'Cannot retrieve reports', error }
+    }
+  }
