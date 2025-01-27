@@ -1,5 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react'
-import { getUserSteamId, getUserSteamProfile } from '../../../apis/steam/searchUser'
+import {FC } from 'react'
 
 export type Player = {
     realname?: string
