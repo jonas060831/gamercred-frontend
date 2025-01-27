@@ -1,4 +1,6 @@
 const BASE_URL = import.meta.env.VITE_BACKEND_SERVER
+
+
 export const getUserSteamProfile = async (steamId:any) => {
 
 
@@ -63,8 +65,6 @@ export const fetchAllGames = async (steamId: string) => {
       const response = await fetch(`${BASE_URL}/complete-game-list/?steamid=${steamId}`)
 
       const games = await response.json()
-
-      console.log(games)
 
       return { success: true, games : games.all_games }
 

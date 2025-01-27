@@ -22,32 +22,25 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
 
   }, [])
 
+  
+
   const fetchLoggedInUserGames = async() => {
-    
-    const user:any = localStorage.getItem('user')
-    const parsedUser:any = JSON.parse(user)
-    
-    const userSteamId = parsedUser.steam_id
 
+        const user:any = localStorage.getItem('user')
+        const parsedUser:any = JSON.parse(user)
+        const userId = parsedUser.steam_id
+        const allGames = await fetchAllGames(userId)
+        setUserGames(allGames)
 
-    const allUserGames = await fetchAllGames(userSteamId)
-    
-    //development env so we can have a matching data to fiona
-    if(import.meta.env.VITE_NODE_ENV == 'development' && allUserGames?.games === undefined) {
-        console.log(123)
-        setUserGames(test_games)
-    } else {
-        
-        setUserGames(allUserGames?.games)
-    }
-
-  }
+        if(import.meta.env.VITE_NODE_ENV === 'development') {
+            setUserGames(test_games)
+        }
+ }
 
   const fetchPlayerToReportGames = async() => {
-
-    const response = await fetchAllGames(playerToReport.steamid)
-    console.log(playerToReport.steamid)
-    console.log(response)
+    const player: any = playerToReport.steamid
+    const allGames = await fetchAllGames(player)
+    setPlayerGames(allGames)
 
   }
 
@@ -161,6 +154,10 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
     </div>
 
         <input type="submit" />
+
+
+        { JSON.stringify(userGames) }
+        {/* { JSON.stringify(playerGames) } */}
 
     </form>
     
