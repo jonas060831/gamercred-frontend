@@ -4,6 +4,7 @@ import MastHead from "../ui/masthead/MastHead"
 import PlayerLookUpForm from "../ui/forms/report-form/PlayerLookUpForm"
 import { fetchRecentGames, getUserSteamId, getUserSteamProfile } from "../apis/steam/searchUser"
 import ReportForm from "../ui/forms/report-form/ReportForm"
+import { fetchReports } from "../services/reportServices"
 
 const ReportFormPage = () => {
 
@@ -11,6 +12,7 @@ const ReportFormPage = () => {
   const [isOnReportForm, setIsOnReportForm] = useState<boolean>(false)
   const [recentSteamGames, setRecentSteamGames] = useState([])
   const [vanityOrSteamId, setVanityOrSteamId] = useState<any>('')
+  const [reports, setReport] = useState([])
 
 
   //this will get trigger once search button is clicked
@@ -54,21 +56,21 @@ const ReportFormPage = () => {
                         setplayerToReport({ personaname: '42' })
                     }
 
-                    const recentgames:any = await fetchRecentGames(playerSteamId!)
-                     
-                     
-                    //forks to handle user not having any game and user having games
-                    if(!recentgames.data) console.log('No games yet')
-                 
-                    else {
-                     //definetly have game
-
-                     setRecentSteamGames(recentgames.data)
-                 
-                    }
-
                     //player found successfully
                     setplayerToReport(playerInfo)
+
+                    const recentgames:any = await fetchRecentGames(playerSteamId)
+                    //forks to handle user not having any game and user having games
+                    if(!recentgames.data) console.log('No games yet')
+                    else setRecentSteamGames(recentgames.data)
+                    
+                    //getting the reports for this player
+                    const recentReports: any = await fetchReports(playerSteamId)
+
+                    console.log(recentReports)
+                    if(recentReports.success) setReport(recentReports.data)
+                    else setReport([])
+
 
                 } else {
                     setplayerToReport({personaname: '42'})
@@ -89,20 +91,17 @@ const ReportFormPage = () => {
                     alert('No Details found')
                     throw new Error("No Details Found")
                 }
+                setplayerToReport(playerInfo)
 
-                const recentgames:any = await fetchRecentGames(vanityOrSteamId)
-                     
-                     
+                const recentgames:any = await fetchRecentGames(vanityOrSteamId)     
                 //forks to handle user not having any game and user having games
                 if(!recentgames.data) console.log('No games yet')
-             
-                else {
-                 //definetly have games
-                 setRecentSteamGames(recentgames.data)
-             
-                }
+                else setRecentSteamGames(recentgames.data)
 
-                setplayerToReport(playerInfo)
+                //getting the reports for this player
+                const recentReports: any = await fetchReports(vanityOrSteamId)
+                if(recentReports.success) setReport(recentReports.data)
+                else setReport([])
 
             } catch (error) {
                 console.log(error)
@@ -135,34 +134,11 @@ const ReportFormPage = () => {
              setVanityOrSteamId={setVanityOrSteamId}
              recentSteamGames={recentSteamGames}
              setIsOnReportForm={setIsOnReportForm}
+             reports={reports}
             />
         </MastHead>
     </div>
   )
-
-  // if(Object.keys(playerToReport).length === 0) return (
-    
-  //   <div className="page_container">
-        
-  //       <MastHead header="Player Lookup" description="" height="auto">
-  //           <PlayerLookUpForm
-  //            playerToReport={playerToReport}
-  //            handleSearch={handleSearch}
-  //            vanityOrSteamId={vanityOrSteamId}
-  //            setVanityOrSteamId={setVanityOrSteamId}
-  //           />
-  //       </MastHead>
-  //   </div>
-  // )
-
-  // return (
-  //   <div className="page_container">
-        
-  //       <MastHead header="Report Player" description="" height="auto">
-  //         <ReportForm />
-  //       </MastHead>
-  //   </div>
-  // )
 }
 
 export default ReportFormPage

@@ -15,8 +15,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
   const [userGames, setUserGames] = useState<any>([])
   const [authUser, setAuthUser] = useState<any>({})
   const [playerGames, setPlayerGames] = useState<any>([])
-  const [matchedGames, setMatchedGames] = useState<any>([])
-    
+  const [matchedGames, setMatchedGames] = useState<any>([])    
   const [formData, setFormData] = useState<any> ({
     game_id : null
   })
@@ -102,7 +101,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
         //default it to first array result
         if(matched.length > 0) {
 
-            const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: `steam_${playerToReport.personaname}_${playerToReport.steamid}` }
+            const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid }
             setFormData(updatedValue)
 
         }
@@ -112,7 +111,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport }) => {
   const handleSubmit = async(event: any) => {
     event.preventDefault()
 
-    
+    console.log(formData)
     const response = await createReport(formData)
 
     console.log(response)

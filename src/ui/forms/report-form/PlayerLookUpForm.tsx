@@ -20,9 +20,10 @@ type PlayerLookUpFormProps = {
     setVanityOrSteamId: (input:any) => any
     recentSteamGames: any[]
     setIsOnReportForm: (isOnReport: boolean) => void
+    reports: any
 }
 
-const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId, setIsOnReportForm }) => {
+const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerToReport, handleSearch, vanityOrSteamId, setVanityOrSteamId, setIsOnReportForm, reports }) => {
 
 
     
@@ -64,6 +65,7 @@ const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerTo
                             playerResult={playerToReport}
                             recentSteamGames={recentSteamGames}
                             setIsOnReportForm={setIsOnReportForm}
+                            reports={reports}
                             /> )
                     }
                     </>
