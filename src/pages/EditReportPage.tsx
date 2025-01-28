@@ -14,8 +14,7 @@ const EditReportPage = () => {
 
   })
   const location:any = useLocation()
-
-
+  
   useEffect(() => {
 
     getReport()
