@@ -35,8 +35,6 @@ const ReportCard:FC<ReportProps> = ({ report }) => {
     } catch (error) {
         console.log(error)
     }
-
-
   }
 
   const handleDelete = async (reportId: number) => {
