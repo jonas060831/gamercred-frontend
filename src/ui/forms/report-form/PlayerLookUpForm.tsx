@@ -39,6 +39,7 @@ const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerTo
         <TextInputWithSearch
          value={vanityOrSteamId}
          onChange={e => setVanityOrSteamId(e.target.value)}
+         placeholder='Enter vanity name or steam id'
         />
         
         <div style={{ height: '10vh' }}>
