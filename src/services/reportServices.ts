@@ -39,6 +39,25 @@ export const fetchReports = async (steamId: any) => {
     }
   }
 
+
+  export const deleteReport = async(formId: any) => {
+
+    try {
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/reports/incident/${formId}/`, { // django requires the trailing slash after the form index
+            method: 'DELETE',
+            headers: {
+                 'Content-Type' : 'application/json'
+            }
+        })
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`)
+        
+        return { success: true, message: "Report deleted successfully" };
+        
+    } catch (error: any) {
+        return {success: false, message: "cannot delete report", error}
+    }
+}
+
   export const updateReport = async (report:any) => {
 
     try {
@@ -61,3 +80,4 @@ export const fetchReports = async (steamId: any) => {
     }
 
   }
+

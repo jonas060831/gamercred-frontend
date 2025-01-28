@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react'
 import ButtonLink from '../../button-link/ButtonLink'
+import { deleteReport } from '../../../services/reportServices'
 
 
 type ReportProps = {
@@ -38,6 +39,18 @@ const ReportCard:FC<ReportProps> = ({ report }) => {
 
   }
 
+  const handleDelete = async (reportId: number) => {
+    const res = await deleteReport(reportId)
+
+    if (res.success){
+        alert(res.message)
+    }
+        else {
+    console.log(res.error);
+    alert(res.message)
+    }
+  }
+
   //avatar of the user
 
   return (
@@ -63,7 +76,7 @@ const ReportCard:FC<ReportProps> = ({ report }) => {
             user.id  ===  parseInt(report.report_owner_id) ? (
                 <>
                     <ButtonLink to={`/report-form/${report.id}`} title='Edit'/>
-                    <button>Delete</button>
+                    <button onClick={() => handleDelete(report.id)}>Delete</button>
                 </>
             ) : (
                 <></>
