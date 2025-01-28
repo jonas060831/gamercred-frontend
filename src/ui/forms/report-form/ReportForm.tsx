@@ -105,19 +105,40 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport, setIsOnReportForm }) =
     // console.log('player games:', playerGames);
     // console.log(playerToReport)
 
-    if (userGames.length > 0 && playerGames.length > 0){
-        const matched = userGames.filter((userGame: any) =>  playerGames.some((playerGame: any) => userGame.appid === playerGame.appid));
+    // if (userGames.length > 0 && playerGames.length > 0){
+    //     const matched = userGames.filter((userGame: any) =>  playerGames.some((playerGame: any) => userGame.appid === playerGame.appid));
 
-        setMatchedGames(matched)
+    //     setMatchedGames(matched)
 
-        //default it to first array result
-        if(matched.length > 0) {
+    //     //default it to first array result
+    //     if(matched.length > 0) {
 
-            const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid, game_name: `${matched[0].name}` }
-            setFormData(updatedValue)
+    //         const updatedValue = {...formData, report_owner : authUser.id, game_id : `${matched[0].appid}`, player_reported: playerToReport.steamid, game_name: `${matched[0].name}` }
+    //         setFormData(updatedValue)
 
-        }
+    //     }
+    // }
+    
+    // defensive check for the array
+    if (Array.isArray(userGames) && Array.isArray(playerGames) && userGames.length > 0 && playerGames.length > 0) {
+      const matched = userGames.filter((userGame: any) =>
+        playerGames.some((playerGame: any) => userGame.appid === playerGame.appid)
+      );
+  
+      setMatchedGames(matched);
+  
+      if (matched.length > 0) {
+        const updatedValue = {
+          ...formData,
+          report_owner: authUser.id,
+          game_id: `${matched[0].appid}`,
+          player_reported: playerToReport.steamid,
+          game_name: `${matched[0].name}`,
+        };
+        setFormData(updatedValue);
+      }
     }
+
   }, [userGames, playerGames])
 
   const handleSubmit = async(event: any) => {
