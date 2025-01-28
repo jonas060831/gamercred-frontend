@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
-import { fetchReports, updateReport } from "../services/reportServices"
-import ReportForm from "../ui/forms/report-form/ReportForm"
+import { /*fetchReports,*/ updateReport } from "../services/reportServices"
+// import ReportForm from "../ui/forms/report-form/ReportForm"
 
 import styles from '../ui/forms/report-form/ReportForm.module.css'
 import MastHead from "../ui/masthead/MastHead"
