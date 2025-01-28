@@ -26,7 +26,7 @@ export const createReport = async (formData: any) => {
 export const fetchReports = async (steamId: any) => {
     
     try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_SERVER}/reports/results/?player_reported=${steamId}`)
+        const response = await fetch(`${BASE_URL}/reports/results/?player_reported=${steamId}`)
 
         const reports = await response.json()
 
@@ -38,6 +38,7 @@ export const fetchReports = async (steamId: any) => {
         return { success: false, message: 'Cannot retrieve reports', error }
     }
   }
+
 
   export const deleteReport = async(formId: any) => {
 
@@ -56,3 +57,27 @@ export const fetchReports = async (steamId: any) => {
         return {success: false, message: "cannot delete report", error}
     }
 }
+
+  export const updateReport = async (report:any) => {
+
+    try {
+        
+        const response = await fetch(`${BASE_URL}/reports/incident/${report.id}/`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body : JSON.stringify(report)
+        })
+
+        const updatedReport = await response.json()
+
+        return { success: true, data: updatedReport }
+
+    } catch (error) {
+        console.log(error)
+        return { success: false, message: 'cannot update report', error }
+    }
+
+  }
+
