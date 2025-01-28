@@ -74,7 +74,7 @@ const ReportForm:FC<ReportFormProps> = ({ playerToReport, setIsOnReportForm }) =
         const allUsersGames:any = await fetchAllGames(authUser.id)
         // console.log(allUsersGames);
         
-              
+        console.log(authUser.id)
         if(import.meta.env.VITE_NODE_ENV === 'development' && allUsersGames.games === undefined || authUser.id === 1) {
             setUserGames(test_games)
         }else {

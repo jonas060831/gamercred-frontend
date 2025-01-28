@@ -13,6 +13,7 @@ type UserResultProps = {
 import styles from './UserResult.module.css'
 import ButtonLink from "../../button-link/ButtonLink"
 import ReportCard from "./ReportCard"
+import Button from "../../buttons/Button"
 
 
 const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOnReportForm, reports}) => {
@@ -90,9 +91,9 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
                     recentSteamGames.length === 0 ? (
                         <></>
                     ) : (
-                        <button onClick={handleStartReport}>
-                          <i className="fa-solid fa-user-pen"></i> Report Player    
-                        </button>
+                        <Button handleClick={handleStartReport} title="Report Player">
+                            
+                        </Button>
                     )
                 }
             </div>

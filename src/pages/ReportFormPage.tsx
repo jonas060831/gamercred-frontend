@@ -120,7 +120,7 @@ const ReportFormPage = () => {
   
   if(isOnReportForm) {
     return (
-     <MastHead header="Report Player" description="" height="auto">
+     <MastHead header="Report Player" description="" height="170vh">
         <ReportForm
          playerToReport={playerToReport}
          setIsOnReportForm={setIsOnReportForm}
@@ -132,7 +132,7 @@ const ReportFormPage = () => {
   return (
     <div className="page_container">
         
-        <MastHead header="Player Lookup" description="" height="auto">
+        <MastHead header="Player Lookup" description="" height="170vh">
 
             
             <PlayerLookUpForm

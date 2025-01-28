@@ -35,7 +35,7 @@ const TextInputWithSearch:FC<TextInputWithSearchProps> = ({ value, onChange, pla
       </div>
 
       
-      <span className={styles.how_to_span}>how to <i className="fa-solid fa-question"></i></span>
+      <span className={styles.how_to_span} style={{ marginBottom: '20px' }}>how to <i className="fa-solid fa-question"></i></span>
 
     </>
   )
