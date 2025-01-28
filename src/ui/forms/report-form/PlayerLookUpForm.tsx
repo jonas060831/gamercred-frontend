@@ -9,9 +9,8 @@ export type Player = {
     
 
 }
-
-import styles from './PlayerLookUpForm.module.css'
 import UserResult from './UserResult'
+import TextInputWithSearch from '../../inputs/TextInputWithSearchProps'
 
 type PlayerLookUpFormProps = {
     playerToReport: any
@@ -34,28 +33,21 @@ const PlayerLookUpForm:FC<PlayerLookUpFormProps> = ({ recentSteamGames, playerTo
     }
 
   return (
-    <form name='playerlookup' onSubmit={handleSubmit}>
-        <input
-            type="text"
-            name=""
-            value={vanityOrSteamId}
-            className={styles.report_form_input_text}
-            onChange={e => setVanityOrSteamId(e.target.value)}
+    <form name='playerlookup' onSubmit={handleSubmit} style={{ width: '600px' }}>
+
+
+        <TextInputWithSearch
+         value={vanityOrSteamId}
+         onChange={e => setVanityOrSteamId(e.target.value)}
         />
         
-        <input
-            type="submit"
-            value="Search"
-            className={styles.report_form_input_submit}
-        />
-
         <div style={{ height: '10vh' }}>
             {
                 Object.keys(playerToReport)?.length === 0 ? (
                     <></>
                 ) : (
                     <>
-                    <h5>result:</h5>
+                    
                     {  
                     playerToReport.personaname === '42' ? (
                             
