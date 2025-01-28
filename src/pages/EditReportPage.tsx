@@ -98,7 +98,7 @@ const EditReportPage = () => {
         <br/><br /><br />
         
 
-        <MastHead header="Report To Edit" description="">
+        <MastHead header="Report To Edit" description="" height="">
             <form className={styles.report_form} onSubmit={handleSubmit}>
 
             {/* <div>
