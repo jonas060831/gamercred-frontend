@@ -16,6 +16,25 @@
     width: 6rem;
     height: 6rem;
     border-radius: 100vw;
-    border: 3px solid gray;
+    border: 2px solid white;
 
+}
+
+
+/* https://stackoverflow.com/questions/43983062/how-to-make-text-in-meter-tag-visible-over-the-meter */
+meter {
+    cursor: pointer;
+    border: none;
+    
+}
+
+meter::-webkit-meter-optimum-value {
+    background: #fa9806; /* Green */
+}
+
+meter::after {
+    content : attr(data-content-text);
+    top:-44px;
+    position:relative;
+    color: black;
 }

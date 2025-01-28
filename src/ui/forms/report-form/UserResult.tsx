@@ -72,9 +72,10 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
                                     recentSteamGames.map((game:any, index) => (
 
 
-                                        <div key={index} style={{ display: 'flex' }}>
-                                            <img src={`https://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`} alt="" style={{ width: '2rem', height: '2rem' }}/>
-                                            {game.name} <br />
+                                        <div key={index} style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <img src={`https://media.steampowered.com/steamcommunity/public/images/apps/${game.appid}/${game.img_icon_url}.jpg`} alt="" style={{ width: '2rem', height: '2rem', marginTop: '0.5rem' }}/>
+                                            <span style={{ marginTop: '0.5rem' }}>{game.name}</span>
+                                            <br />
                                         </div>
                                     ))
                                 }
@@ -94,15 +95,13 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
                         </button>
                     )
                 }
-                
-
             </div>
 
 
             {/* information section */}
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
                 
-                <ButtonLink to="/" title="Steam Link"/>
+                <ButtonLink to={`${playerResult.profileurl}`} title="Steam Profile"/>
                 
                 <br />
                 
@@ -126,7 +125,22 @@ const UserResult:FC<UserResultProps> = ({recentSteamGames, playerResult, setIsOn
 
         {/* reputation bar */}
         <div>
-            <progress value="32" max="100" style={{ width: '100%' }}>32%</progress>
+                
+            <meter
+             id="reputation_bar"
+             data-content-text='Reputation Bar'
+             value="30"
+             min="0"
+             max="100"
+             style={{
+                width: '100%',
+                height: '4rem',
+                color: '#fa9806'
+             }}
+            >
+                Reputation Bar
+            </meter>
+
         </div>
     </div>
     

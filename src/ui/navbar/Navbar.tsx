@@ -1,15 +1,48 @@
 // https://framermotion.framer.website
 
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import BasicButton from '../buttons/BasicButton'
 
 const Navbar = () => {
 
+  const navigate = useNavigate()
   const [isOCNOpen, setisOCNOpen] = useState<boolean>(false)
-
+  const [user, setUser] =useState<any>({})
+  
   const toggleOffCanvasMenu = () :void => setisOCNOpen(!isOCNOpen)
+
+  useEffect(() => {
+
+    getUser()
+
+  }, [])
+
+  const getUser = () => {
+
+    try {
+        
+        const user:any = localStorage.getItem('user')
+        const parsedUser = JSON.parse(user)
+
+        if(!user) throw new Error('No user found')
+
+        setUser(parsedUser)
+
+    } catch (error) {
+        console.log(error)
+    }
+
+  }
+
+  const handleLogout = () => {
+
+    localStorage.removeItem('user')
+
+    navigate('/login')
+  }
   
   return (
     <>
@@ -72,7 +105,16 @@ const Navbar = () => {
 
                 <NavLink to="/report-form" >Report Form</NavLink> 
 
-                <NavLink to="/login" style={{ color: '#fa9806' }}>Login</NavLink>    
+                
+
+                {
+                    Object.keys(user).length === 0 ? (
+                        <NavLink to="/login" style={{ color: '#fa9806' }}>Login</NavLink>
+                    ) : (
+                        <BasicButton title='Logout' handleClick={handleLogout}/>
+                    )
+                }
+
             </div>
 
             {/* tablet and mobile */}

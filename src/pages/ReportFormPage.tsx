@@ -133,6 +133,8 @@ const ReportFormPage = () => {
     <div className="page_container">
         
         <MastHead header="Player Lookup" description="" height="auto">
+
+            
             <PlayerLookUpForm
              playerToReport={playerToReport}
              handleSearch={handleSearch}
@@ -142,6 +144,7 @@ const ReportFormPage = () => {
              setIsOnReportForm={setIsOnReportForm}
              reports={reports}
             />
+            
         </MastHead>
     </div>
   )
